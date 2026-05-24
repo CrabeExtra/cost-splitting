@@ -6,7 +6,7 @@
     import { onMount } from "svelte";
     import { toast } from "svelte-sonner";
 
-    let people = [];
+    let people = $state([]);
 
     let selectedPeople = $state([]);
 
