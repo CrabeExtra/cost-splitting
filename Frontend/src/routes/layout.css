@@ -1,0 +1,147 @@
+.page {
+    min-height: 100vh;
+    background: #0f1115;
+    color: #e5e7eb;
+}
+
+.content {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.card {
+    background: #161a22;
+
+    border: 1px solid #252b36;
+
+    border-radius: 16px;
+
+    padding: 1.5rem;
+
+    box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.25);
+}
+
+h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+}
+
+p {
+    color: #9ca3af;
+    line-height: 1.6;
+}
+
+input {
+    width: 95%;
+
+    padding: 0.85rem 1rem;
+
+    margin-bottom: 1rem;
+
+    background: #0f1115;
+
+    border: 1px solid #2f3746;
+
+    border-radius: 10px;
+
+    color: white;
+
+    font-size: 1rem;
+}
+
+input:focus {
+    outline: none;
+    border-color: #3b82f6;
+
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+button.action {
+    margin-top: 1rem;
+
+    background: #252b36;
+
+    opacity: 0.7;
+
+    color: white;
+
+    border: none;
+
+    padding: 0.8rem 1.2rem;
+
+    border-radius: 10px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease;
+}
+
+button.action:hover {
+    opacity: 1;
+}
+
+button.action:active {
+    transform: scale(0.98);
+}
+
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #161a22;
+    border: 1px solid #252b36;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+}
+
+thead {
+    background: #0f1115;
+}
+
+th {
+    text-align: left;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #e5e7eb;
+    padding: 1rem;
+    border-bottom: 1px solid #252b36;
+    letter-spacing: 0.02em;
+}
+
+td {
+    padding: 1rem;
+    color: #9ca3af;
+    border-bottom: 1px solid #252b36;
+    font-size: 0.95rem;
+}
+
+tbody tr {
+    transition: background 0.15s ease, transform 0.15s ease;
+}
+
+tbody tr:hover {
+    background: rgba(59, 130, 246, 0.06);
+    cursor: pointer;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Optional: clickable rows feel */
+tbody tr:active {
+    transform: scale(0.997);
+}
+
+/* Optional: align with your input focus style */
+.table td strong {
+    color: #e5e7eb;
+}
+
