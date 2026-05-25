@@ -6,8 +6,10 @@
 
 .content {
     padding: 2rem;
-    max-width: 800px;
+    max-width: 90vw;
+    width: 70%;
     margin: 0 auto;
+    overflow: auto;
 }
 
 .card {
@@ -145,3 +147,43 @@ tbody tr:active {
     color: #e5e7eb;
 }
 
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+
+    border-radius: 8px;
+    cursor: pointer;
+
+    transition: all 0.15s ease;
+
+    opacity: 0.8;
+}
+
+.edit-btn {
+    color: #fff;
+}
+
+.delete-btn {
+    color: #ff4d4f;
+}
+
+.action-btn:hover {
+    transform: translateY(-1px);
+    opacity: 1; 
+}
+
+.action-btn:active {
+    transform: translateY(0px);
+}
+
+.icon {
+    width: 18px;
+    height: 18px;
+}

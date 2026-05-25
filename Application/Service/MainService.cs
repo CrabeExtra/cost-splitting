@@ -123,6 +123,7 @@ public class MainService(
         return new ExpenseDto
         {
             Id = expense.Id,
+            Name = expense.Name,
             Cost = expense.Cost,
             Type = expense.Type
         };
@@ -163,6 +164,9 @@ public class MainService(
             ContributionId = dto.ContributionId
                 ?? existingItem?.ContributionId
                 ?? throw new ServiceException("Field 'ContributionId' was not provided and must exist."),
+            CostCents = dto.CostCents
+                ?? existingItem?.CostCents
+                ?? throw new ServiceException("Field 'CostCents' was not provided and must exist."),
 
             Contribution = null!
         };
@@ -225,11 +229,6 @@ public class MainService(
                 ?? existingContribution?.Name
                 ?? throw new ServiceException("Field 'Name' was not provided and must exist."),
 
-            ContributionCents = dto.Contribution != null
-                ? (int)(dto.Contribution.Value * 100)
-                : existingContribution?.ContributionCents
-                ?? throw new ServiceException("Field 'Contribution' was not provided and must exist."),
-
             PersonId = dto.PersonId
                 ?? existingContribution?.PersonId
                 ?? throw new ServiceException("Field 'PersonId' was not provided and must exist."),
@@ -237,6 +236,18 @@ public class MainService(
             ExpenseId = dto.ExpenseId
                 ?? existingContribution?.ExpenseId
                 ?? throw new ServiceException("Field 'ExpenseId' was not provided and must exist."),
+
+            TargetCostCents = dto.TargetCostCents
+                ?? existingContribution?.TargetCostCents
+                ?? 0,
+
+            Weight = dto.Weight
+                ?? existingContribution?.Weight
+                ?? 0,
+
+            Percentage = dto.Percentage
+                ?? existingContribution?.Percentage
+                ?? 0,
 
             Person = null!,
             Expense = null!,
@@ -277,6 +288,25 @@ public class MainService(
             Contribution = c.Contribution,
             PersonId = c.PersonId,
             ExpenseId = c.ExpenseId
+        });
+    }
+
+    public async Task<IEnumerable<ContributionDto>> GetContributionsByExpense(Guid expenseId, CancellationToken ct)
+    {
+        var contributions = await contributionRepository.GetContributionsByExpense(expenseId);
+
+        return contributions.Select(c => new ContributionDto
+        {
+            Id = c.Id,
+            Name =  c.Name,
+            PersonName = c.Person.Name,
+            ExpenseName = c.Expense.Name,
+            PersonId = c.PersonId,
+            ExpenseId = c.ExpenseId,
+            Contribution = c.Contribution,
+            TargetCostCents = c.TargetCostCents,
+            Weight = c.Weight,
+            Percentage = c.Percentage
         });
     }
 

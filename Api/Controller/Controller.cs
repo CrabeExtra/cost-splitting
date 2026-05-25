@@ -149,6 +149,14 @@ public class Controller(
         return Ok(expense);
     }
 
+    [HttpGet("contributions/expense/{expenseId}")]
+    public async Task<IActionResult> GetContributionByExpense(string expenseId, CancellationToken ct)
+    {
+        var expenses = await service.GetContributionsByExpense(Guid.Parse(expenseId), ct);
+         
+        return Ok(expenses);
+    }
+
     [HttpGet("contributions")]
     public async Task<IActionResult> GetContributions(CancellationToken ct)
     {

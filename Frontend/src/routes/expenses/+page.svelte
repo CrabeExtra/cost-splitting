@@ -26,16 +26,26 @@
         expenses = response.data;
     }
 
+    const clickRow = async (rowData) => {
+        goto(`/expenses/${rowData.id}`);
+    }
+
     onMount(async () => {
         await loadPeople();
     })
 
 </script>
 {#snippet actionSnippet(row)}
-    <button class="action-btn delete-btn" onclick={() => deleteExpense(row.id)} aria-label="Delete">
+    <button class="action-btn delete-btn" onclick={(e) => {
+            e.stopPropagation();
+            deleteExpense(row.id);
+        }} aria-label="Delete">
         <Trash2 class="icon" />
     </button>
-     <button class="action-btn edit-btn" onclick={() => goto(`/expenses/add/${row.id}`)} aria-label="Update">
+     <button class="action-btn edit-btn" onclick={(e) => {
+            e.stopPropagation();
+            goto(`/expenses/add/${row.id}`);
+        }} aria-label="Update">
         <PencilIcon class="icon" />
     </button>
 {/snippet}
@@ -46,7 +56,7 @@
         <button style="margin: 1rem 0;" class="action" onclick={() => goto('/expenses/add')}>
             Add Expense
         </button>
-        <GenericTable data={expenses} columns={columns} />
+        <GenericTable data={expenses} columns={columns} rowClick={clickRow} />
     </div> 
 </div>
 

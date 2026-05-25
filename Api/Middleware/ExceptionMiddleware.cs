@@ -17,16 +17,18 @@ public class ExceptionMiddleware
         _next = next;
     }
 
-    private static Task WriteError(HttpContext context, int statusCode, string message)
-{
-    context.Response.ContentType = "application/json";
-    context.Response.StatusCode = statusCode;
-
-    return context.Response.WriteAsJsonAsync(new ErrorResponse
+    private static Task WriteError(HttpContext context, int statusCode, Exception ex)
     {
-        Message = message
-    });
-}
+        Console.WriteLine(ex); // log the error so no silent failures for unknown errors.
+
+        context.Response.ContentType = "application/json";
+        context.Response.StatusCode = statusCode;
+
+        return context.Response.WriteAsJsonAsync(new ErrorResponse
+        {
+            Message = ex.Message
+        });
+    }
 
     public async Task Invoke(HttpContext context)
     {
@@ -36,15 +38,16 @@ public class ExceptionMiddleware
         }
         catch (ServiceException ex)
         {
-            await WriteError(context, 400, ex.Message);
+            await WriteError(context, 400, ex);
         }
         catch (RepositoryException ex)
         {
-            await WriteError(context, 409, ex.Message);
+            await WriteError(context, 409, ex);
         }
-        catch (Exception)
-        {
-            await WriteError(context, 500, "An unexpected error occurred");
+        catch (Exception e)
+        {   
+            Console.WriteLine(e);
+            await WriteError(context, 500, new Exception("An unexpected error occurred"));
         }
     }
 }

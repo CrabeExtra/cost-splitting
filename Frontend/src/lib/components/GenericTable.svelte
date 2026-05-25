@@ -7,9 +7,10 @@
     render?: (row: T) => Snippet;
   };
 
-  let { data, columns } = $props<{
+  let { data, columns, rowClick } = $props<{
     data: T[];
     columns: Column<T>[];
+    rowClick: (row: T) => void;
   }>();
 
 </script>
@@ -25,13 +26,13 @@
 
   <tbody>
     {#each data as row}
-      <tr>
+      <tr onclick={() => (rowClick ? rowClick(row) : () => {})}>
         {#each columns as col}
           <td>
             {#if col.render}
               {@render col.render(row)}
             {:else}
-              {row[col.key]}
+              {row[col.key] ?? 'N/A'}
             {/if}
           </td>
         {/each}

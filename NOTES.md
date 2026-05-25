@@ -50,6 +50,8 @@ Database requirements:
 
 ### Things to mention
 - Could add pagination and sorting as well as %LIKE% based searching for each field.
+- Complete adding expenses section
 - Input sanitation.
 - Code cleanup.
 - optimisation.
+- Items list section to add and remove items from a specific contribution

@@ -57,22 +57,6 @@
         );
     };
 
-    // this done on frontend!?! security!! stop!! you violated the law!
-    function splitEvenly(totalCents, people) {
-        const base = Math.floor(totalCents / people.length);
-        let remainder = totalCents % people.length;
-
-        return people.map(p => {
-            const share = base + (remainder > 0 ? 1 : 0);
-            remainder--;
-
-            return {
-                ...p,
-                share: (share / 100)
-            };
-        });
-    }
-
     /**
      * Very minimal error handling here, let it be known that this is a project I want to complete quickly.
      * This should all honestly be a dedicated businesslogic/service layer API.
@@ -95,9 +79,6 @@
                 return {...p, id: newId};
             })
         );
-        
-        selectedPeople = splitEvenly(fields.totalCost * 100, selectedPeople);
-
 
         // create the expense.
         const expenseId = (await ApiClient.post('expenses', {
@@ -110,7 +91,6 @@
         await Promise.all(selectedPeople.map(async (p) => {
             const response = await ApiClient.post('contributions', {
                 name: `Contribution from ${p.value}.`,
-                contribution: p.share, 
                 personId: p.id,
                 expenseId: expenseId
             });

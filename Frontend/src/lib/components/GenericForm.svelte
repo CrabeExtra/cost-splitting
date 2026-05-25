@@ -18,7 +18,7 @@
     const formatData = () => {
         const formattedFields = {};
         
-        formFields.map(f => {
+        formFields?.map(f => {
             formattedFields[f.key] = f.value;
         })
         handleSubmit(formattedFields)
@@ -49,13 +49,13 @@
                 type={input.type || 'text'}
                 placeholder={input.placeholder || ''}
                 oninput={(e) => {
-                    formFields = formFields.map(f =>
+                    formFields = formFields?.map(f =>
                         f.key === input.key
                             ? { ...f, value: e.target.value }
                             : f
                     );
                 }}
-                value={formFields?.find(f => f.key === input.key).value ?? ''}
+                value={formFields?.find(f => f.key === input.key)?.value ?? ''}
             />
         {/each}
 

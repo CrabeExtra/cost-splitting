@@ -26,6 +26,7 @@ public interface IMainService
     Task<Guid> AddContribution(AddContributionDto dto, CancellationToken ct);
     Task<ContributionDto> GetContribution(Guid id, CancellationToken ct);
     Task<IEnumerable<ContributionDto>> GetContributions(CancellationToken ct);
+    Task<IEnumerable<ContributionDto>> GetContributionsByExpense(Guid expenseId, CancellationToken ct);
     Task<Guid?> DeleteContribution(Guid id, CancellationToken ct);
 
 }

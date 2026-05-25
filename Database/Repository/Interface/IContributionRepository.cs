@@ -5,4 +5,5 @@ namespace Round_2.Database.Repository.Interface;
 
 public interface IContributionRepository : IEntityRepository<Contributions>
 {
+    Task<IEnumerable<Contributions>> GetContributionsByExpense(Guid expenseId);
 }

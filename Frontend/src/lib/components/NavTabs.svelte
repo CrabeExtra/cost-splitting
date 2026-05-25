@@ -76,7 +76,7 @@
 	}
 </style>
 
-<nav class="navbar" style="position: fixed; width: 100vw; height: 40px">
+<nav class="navbar" style="position: fixed; width: 100vw; height: 40px; z-index: 1000;">
 	{#each tabs as tab}
 		<button
 			class="tab"
